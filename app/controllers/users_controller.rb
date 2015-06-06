@@ -1,6 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  def login
+    if u = User.find_by(email: params[:email])
+      session[:current_user_id] = u.id
+    end
+    redirect_to '/'
+  end
+
   # GET /users
   # GET /users.json
   def index
