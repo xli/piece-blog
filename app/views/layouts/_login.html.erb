@@ -6,8 +6,9 @@
   <% end %>
 </h5>
 <% else %>
-  <%= form_tag('/login') do |f| %>
+  <%= form_tag('/login', style: 'display: inline') do |f| %>
     <%= text_field_tag :email, '', :placeholder => 'Email' %>
     <%= submit_tag 'Login' %>
   <% end %>
+  <%= link_to 'Sign Up', new_user_path %>
 <% end %>
