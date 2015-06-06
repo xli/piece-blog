@@ -5,7 +5,12 @@ class UsersController < ApplicationController
     if u = User.find_by(email: params[:email])
       session[:current_user_id] = u.id
     end
-    redirect_to '/'
+    redirect_to root_path
+  end
+
+  def logout
+    session[:current_user_id] = nil
+    redirect_to root_path
   end
 
   # GET /users

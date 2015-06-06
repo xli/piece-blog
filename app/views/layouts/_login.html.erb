@@ -1,5 +1,10 @@
 <% if current_user %>
-<h5>Hello: <%= current_user.email %></h5>
+<h5>
+  <%= current_user.email %> (<%= current_user.role %>)
+  <%= form_tag('/logout', style: 'display: inline') do |f| %>
+    <%= submit_tag 'Logout' %>
+  <% end %>
+</h5>
 <% else %>
   <%= form_tag('/login') do |f| %>
     <%= text_field_tag :email, '', :placeholder => 'Email' %>
