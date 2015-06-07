@@ -1,4 +1,6 @@
-<h6>Action:</h6>
-<pre><code><%= action %></code></pre>
-<h6>Matching Sequence:</h6>
-<pre><code><%= Rails.configuration.privileges[action].to_yaml %></code></pre>
+<div class="authorization">
+  <% matching = Rails.configuration.privileges[action] %>
+  <pre><code>current_action => <%= action %> <%= "(before redirected)" if redirected %>
+matching = privileges[current_action] => <%= matching.inspect %>
+matching.last == :match => <%= matching.last == :match ? "true (Authorized)" : "false (Unauthorized)" %></code></pre>
+</div>

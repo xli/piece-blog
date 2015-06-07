@@ -10,28 +10,32 @@
 <!-- .container is main centered wrapper -->
 <div class="container">
   <div class="row">
-    <div class="seven columns">
-      <%= render partial: 'layouts/login' %>
-      <% if flash[:error] %>
-      <div class="error">
-        <%= flash[:error] %>
-      </div>
-      <% end %>
-      <% if flash[:notice] %>
-      <div class="notice">
-        <%= flash[:notice] %>
-      </div>
-      <% end %>
-      <%= yield %>
-    </div>
-    <div class="rules five columns">
-      <h5>Role privileges:</h5>
+    <div class="rules">
+      privileges = Piece.load(<a href="javascript:$('#rd').toggle()">File.read(Rails.root.join('config', 'privileges.yml'))</a>)
+      <div id="rd" style="display: none">
       <pre><code><%= Rails.configuration.privileges_yml %></code></pre>
+      </div>
       <% if session[:redirected_action] %>
-        <%= render partial: 'layouts/matching', locals: { action: session[:redirected_action] } %>
+      <%= render partial: 'layouts/matching', locals: { action:
+      session[:redirected_action], redirected: true } %>
       <% end %>
-      <%= render partial: 'layouts/matching', locals: { action: current_action } %>
+      <%= render partial: 'layouts/matching', locals: { action:
+          current_action, redirected: false } %>
     </div>
+  </div>
+  <div class="row">
+    <%= render partial: 'layouts/login' %>
+    <% if flash[:error] %>
+    <div class="error">
+      <%= flash[:error] %>
+    </div>
+    <% end %>
+    <% if flash[:notice] %>
+    <div class="notice">
+      <%= flash[:notice] %>
+    </div>
+    <% end %>
+    <%= yield %>
   </div>
 </div>
 
