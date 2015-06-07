@@ -1,34 +1,14 @@
-<p id="notice"><%= notice %></p>
-
-<h3>Posts</h3>
-
-<table border=1 width="100%">
-  <thead>
-    <tr>
-      <th>Post</th>
-      <th>Author</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% if @posts.empty? %>
-      <tr>
-        <td colspan="5">No posts</td>
-      </tr>
-    <% end %>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td width="250px"><%= post.user.try(:email) %></td>
-        <td width="80px"><%= link_to 'Show', post %></td>
-        <td width="80px"><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td width="80px"><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+<div class="u-cf">
+  <div class="u-pull-left"><h5>Posts </h5></div>
+  <div class="u-pull-right"><%= link_to "new", new_post_path, class: "button" %></div>
+</div>
+<ul>
+  <% if @posts.empty? %>
+  <li>No posts</li>
+  <% end %>
+  <% @posts.each do |post| %>
+  <li>
+    <%= link_to post.title, post %> by <%= post.user.try(:email) || "anonymous" %>
+  </li>
+  <% end %>
+</ul>

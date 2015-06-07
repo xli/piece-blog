@@ -1,14 +1,18 @@
-<% if current_user %>
-<h5>
-  <%= current_user.email %> (<%= current_user.role %>)
-  <%= form_tag('/logout', style: 'display: inline') do |f| %>
-    <%= submit_tag 'Logout' %>
-  <% end %>
-</h5>
-<% else %>
-  <%= form_tag('/login', style: 'display: inline') do |f| %>
+<div class="u-cf header">
+  <div class="u-pull-right">
+    <% if current_user %>
+    <h5>
+      <%= current_user.email %> (<%= current_user.role %>)
+      <%= form_tag('/logout', style: 'display: inline') do |f| %>
+      <%= submit_tag 'Logout' %>
+      <% end %>
+    </h5>
+    <% else %>
+    <%= form_tag('/login') do |f| %>
     <%= text_field_tag :email, '', :placeholder => 'Email' %>
-    <%= submit_tag 'Login' %>
-  <% end %>
-  <%= link_to 'Sign Up', new_user_path %>
-<% end %>
+    <%= submit_tag 'Login', class: "button-primary" %>
+    <%= link_to 'Sign Up', new_user_path, class: "button" %>
+    <% end %>
+    <% end %>
+  </div>
+</div>

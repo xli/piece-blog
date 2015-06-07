@@ -7,10 +7,33 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= render partial: 'layouts/login' %>
-
-<%= yield %>
+<!-- .container is main centered wrapper -->
+<div class="container">
+  <div class="row">
+    <div class="seven columns">
+      <%= render partial: 'layouts/login' %>
+      <% if flash[:error] %>
+      <div class="error">
+        <%= flash[:error] %>
+      </div>
+      <% end %>
+      <% if flash[:notice] %>
+      <div class="notice">
+        <%= flash[:notice] %>
+      </div>
+      <% end %>
+      <%= yield %>
+    </div>
+    <div class="rules five columns">
+      <h5>Role privileges:</h5>
+      <pre><code><%= Rails.configuration.privileges_yml %></code></pre>
+      <% if session[:redirected_action] %>
+        <%= render partial: 'layouts/matching', locals: { action: session[:redirected_action] } %>
+      <% end %>
+      <%= render partial: 'layouts/matching', locals: { action: current_action } %>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

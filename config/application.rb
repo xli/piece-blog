@@ -22,5 +22,7 @@ module PieceBlog
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.privileges_yml = File.read(Rails.root.join('config', 'privileges.yml'))
+    config.privileges = Piece.load(config.privileges_yml)
   end
 end

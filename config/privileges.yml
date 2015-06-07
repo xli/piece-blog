@@ -1,0 +1,7 @@
+writer:
+  posts: '*'
+admin: '*'
+author: writer + anonymous
+anonymous:
+  users: [login, logout, new, create]
+  posts: [index, show]

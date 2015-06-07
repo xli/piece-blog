@@ -2,15 +2,18 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def login
-    if u = User.find_by(email: params[:email])
-      session[:current_user_id] = u.id
-    end
-    redirect_to root_path
+    msg = if u = User.find_by(email: params[:email])
+            login_user(u)
+            "Welcome back"
+          else
+            "Unknown user email: #{params[:email]}"
+          end
+    redirect_to root_path, notice: msg
   end
 
   def logout
     session[:current_user_id] = nil
-    redirect_to root_path
+    redirect_to root_path, notice: "Bye."
   end
 
   # GET /users
@@ -40,7 +43,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        if current_user.nil?
+          login_user(@user)
+        end
+
+        format.html { redirect_to root_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
