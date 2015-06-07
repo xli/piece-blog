@@ -7,4 +7,8 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def login_as(role)
+    u = User.create!(name: role, role: role)
+    session[:current_user_id] = u.id
+  end
 end

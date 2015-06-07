@@ -2,11 +2,11 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def login
-    msg = if u = User.find_by(email: params[:email])
+    msg = if u = User.find_by(name: params[:name])
             login_user(u)
             "Welcome back"
           else
-            "Unknown user email: #{params[:email]}"
+            "Unknown user name: #{params[:name]}"
           end
     redirect_to root_path, notice: msg
   end
@@ -88,6 +88,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:role, :email)
+      params.require(:user).permit(:role, :name)
     end
 end

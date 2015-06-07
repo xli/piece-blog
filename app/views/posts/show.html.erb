@@ -12,7 +12,7 @@
 
 <p>
   <strong>Author:</strong>
-  <%= @post.user.try(:email) || 'anonymous' %>
+  <%= @post.user.try(:name) || 'anonymous' %>
 </p>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |

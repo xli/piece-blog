@@ -8,7 +8,7 @@
   <% end %>
   <% @posts.each do |post| %>
   <li>
-    <%= link_to post.title, post %> by <%= post.user.try(:email) || "anonymous" %>
+    <%= link_to post.title, post %> by <%= post.user.try(:name) || "anonymous" %>
   </li>
   <% end %>
 </ul>

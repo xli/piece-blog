@@ -3,6 +3,7 @@ require 'test_helper'
 class PostsControllerTest < ActionController::TestCase
   setup do
     @post = posts(:one)
+    login_as(:author)
   end
 
   test "should get index" do
