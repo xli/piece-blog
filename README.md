@@ -10,7 +10,7 @@ This is a blog application:
 
 1. Everyone can read any blog post.
 2. Everyone can register as author to write and publish blog post.
-3. To keep it simple, everyone can also register user as admin role.
+3. To keep it simple and let you try out all roles, everyone can also register user as admin role.
 
 Roles and permissions:
 
@@ -41,14 +41,15 @@ Anonymous role is straightforward:
       posts: [index, show]
 
 Basically, we just specify what anonymous user can do using controller
-name and action name.
+and action names.
 
-To define author role, we'll define another role named 'writer' first:
+To define author role, we define another role named 'writer' first:
 
     writer:
       posts: '*'
 
-('*' is wildcard char in Piece. It means matching everything.)
+('*' is wildcard char in Piece. It means matching all actions in the
+above case.)
 
 Then we can combine writer and anonymous role to get author role:
 
@@ -58,7 +59,7 @@ Admin role is also simple:
 
     admin: '*'
 
-In the above example, we used "*" to match all actions in posts
+In the writer role, we used "*" to match all actions in posts
 controller. Here we use it to match all controllers and their actions.
 
 Done. Combine them all together:
@@ -71,14 +72,13 @@ Done. Combine them all together:
       users: [login, logout, new, create]
       posts: [index, show]
 
-See config/privileges.yml
+We put them in config/privileges.yml
 
 User role
 ------------------
 
 Add role attribute to User model. We use string in this application,
-and set it when created user. Then in application we can get user role
-by:
+and set it when created user.
 
     user.role
 
@@ -117,7 +117,7 @@ So in ApplicationController, we add:
     end
 
 
-The `current_action` definition is simple and related to how we define rules:
+The `current_action` definition is matching how we define rules:
 
     def current_action
       [current_user.try(:role) || 'anonymous', controller_name, action_name]
@@ -139,9 +139,9 @@ be performed.
 Play it
 --------------------
 
-This application is designed to explain how the authorization works.
-So you can simply launch this rails application on your local machine
-and try it out.
+This application is designed to explain how Piece authorization works.
+You can launch this rails application
+.
 
 For example:
 
