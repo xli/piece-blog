@@ -8,25 +8,25 @@ Basic Requirement
 
 This is a blog application:
 
-# Everyone can read any blog post.
-# Everyone can register as author to write and publish blog post.
-# To keep it simple, everyone can also register user as admin role.
+1. Everyone can read any blog post.
+2. Everyone can register as author to write and publish blog post.
+3. To keep it simple, everyone can also register user as admin role.
 
 Roles and permissions:
 
-# There are three types user: admin, author, anonymous
-# Admin user can do everything in application
-# Author can create, edit and delete blog post, but can't view/edit/delete user.
-# Anonymous user can read blog post and register new user.
+1. There are three types user: admin, author, anonymous
+2. Admin user can do everything in application
+3. Author can create, edit and delete blog post, but can't view/edit/delete user.
+4. Anonymous user can read blog post and register new user.
 
 Models and controllers:
 
-# We have 2 models and controllers: users and posts
-# Posts controller:
-    # Blog post CRUD
-# Users controller is controlling user
-    # User CRUD
-    # Login & logout user
+1. We have 2 models and controllers: users and posts
+2. Posts controller:
+    1. Blog post CRUD
+3. Users controller is controlling user
+    1. User CRUD
+    2. Login & logout user
 
 Role based user privileges defined by rules
 ----------------
@@ -117,7 +117,7 @@ So in ApplicationController, we add:
     end
 
 
-The current_action definition is simple and related to how we define rules:
+The `current_action` definition is simple and related to how we define rules:
 
     def current_action
       [current_user.try(:role) || 'anonymous', controller_name, action_name]
@@ -125,13 +125,27 @@ The current_action definition is simple and related to how we define rules:
 
 This method returns an Array with three elements matching to the
 levels we defined in privileges YAML. First one is user role name, we
-set it  as 'anonymous' if there is no user logged in. Then second and
+set it to 'anonymous' if there is no user logged in. Second and
 third elements are controller name and action name.
 
-Then when you call `Rails.configuration.privileges[current_action]`,
+When you call `Rails.configuration.privileges[current_action]`,
 it returns you an array of matching sequence to explain why the
-current_action matches or mismatches the rules we defined in
+`current_action` matches or mismatches the rules we defined in
 privileges.yml.
 The last element in matching sequence is either `:match` or
-`:mismatch`. You can also print out the sequence like
-app/view/layouts/_matching.html.erb did.
+`:mismatch`, which indicates whether current_action is authorized to
+be performed.
+
+Play it
+--------------------
+
+This application is designed to explain how the authorization works.
+So you can simply launch this rails application on your local machine
+and try it out.
+
+For example:
+
+![How the application works](screenshot1.png)
+
+The top panel shows what's `current_action`, what's matching sequence
+and what's result (Unauthorized).
