@@ -140,12 +140,7 @@ Play it
 --------------------
 
 This application is designed to explain how Piece authorization works.
-You can launch this rails application
-.
-
-For example:
+The following screenshot is showing why the request is unauthorized
+when an anonymous user trying to create new post:
 
 ![How the application works](screenshot1.png)
-
-The top panel shows what's `current_action`, what's matching sequence
-and what's result (Unauthorized).
