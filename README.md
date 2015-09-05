@@ -1,9 +1,9 @@
-Piece Blog is an example application
+Piece Blog is an example Rails application
 ==================
 
-This application is an example to show how "Piece":https://github.com/ThoughtWorksStudios/piece works.
+This application is an example to show how [Piece](https://github.com/ThoughtWorksStudios/piece) works.
 
-Basic Requirement
+What this application does
 ------------------
 
 This is a blog application:
