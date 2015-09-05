@@ -139,8 +139,15 @@ be performed.
 Play it
 --------------------
 
+Launch this app:
+
+1. bundle install
+2. rake db:migrate
+3. rails s
+
 This application is designed to explain how Piece authorization works.
 The following screenshot is showing why the request is unauthorized
 when an anonymous user trying to create new post:
 
 ![How the application works](screenshot1.png)
+
